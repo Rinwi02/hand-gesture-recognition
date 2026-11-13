@@ -75,7 +75,48 @@ Kapitanov, A., Makhlyarchuk, A., and Kvanchiani, K. (2022). *HaGRID - HAnd Gestu
 
 ## Results
 
-Add your results here: test accuracy, confusion matrix, and screenshots (place the images in `figures/`).
+The model was evaluated on a held-out test set of 2,502 images from people who were not used in training (the data is split by person).
+
+| Metric | Value |
+|---|---|
+| Gesture classes | 10 |
+| Train / validation / test images | 12,558 / 2,503 / 2,502 |
+| Best validation accuracy | 98.9% |
+| **Test accuracy** | **99.04%** |
+| Training time | 19 minutes (Google Colab GPU) |
+
+### Per-gesture test results
+
+| Gesture | Precision | Recall | F1-score | Test images |
+|---|---|---|---|---|
+| call | 0.99 | 1.00 | 0.99 | 253 |
+| dislike | 1.00 | 1.00 | 1.00 | 259 |
+| fist | 1.00 | 1.00 | 1.00 | 235 |
+| like | 1.00 | 0.99 | 0.99 | 243 |
+| ok | 0.98 | 0.98 | 0.98 | 261 |
+| one | 0.98 | 0.99 | 0.99 | 246 |
+| palm | 0.99 | 0.98 | 0.99 | 277 |
+| peace | 0.98 | 0.99 | 0.99 | 255 |
+| rock | 0.99 | 1.00 | 0.99 | 239 |
+| stop | 0.99 | 0.98 | 0.98 | 234 |
+
+`dislike` and `fist` were classified perfectly. The lowest scores (F1 of 0.98) belong to `ok` and `stop`. The test images come from the same dataset as the training images, so accuracy on a live webcam may be lower.
+
+### Sample images
+
+![Sample cropped images of each gesture](figures/gesture_samples.png.png)
+
+### Confusion matrix
+
+![Confusion matrix on the test set](figures/confusion_matrix.png.png)
+
+### Fixed box vs hand tracking
+
+| Fixed box (`app_fixed_box.py`) | Hand tracking (`app.py`, `live_cam.py`) |
+|---|---|
+| ![Fixed-box version](figures/fixed_box_demo.png.png) | ![Tracking version](figures/tracking_demo.png.png) |
+
+In live testing, the tracking version only produced an output when a hand was visible to the webcam. The fixed-box version gave reliable results only when the hand was inside the box, and it still showed predictions when no hand was in the frame.
 
 ## Author
 
